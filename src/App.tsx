@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import crypto, { Identities, Transactions} from '@solar-network/crypto';
-import { BigNumber } from '@solar-network/utils';
-import { Wallet } from './Wallet';
-import { Settings } from './Settings';
-import { Welcome } from './Welcome';
- declare var browser:any;
+import React, { useEffect, useState } from "react";
+import crypto, { Identities, Transactions } from "@solar-network/crypto";
+import { BigNumber } from "@solar-network/utils";
+import { Settings } from "./pages/Settings";
+import { Welcome } from "./pages/Welcome";
+import { Login } from "./pages/Login";
+import { New } from "./pages/New";
+import { Import } from "./pages/Import";
+import { Wallet } from "./pages/Wallet";
+declare var browser: any;
 
 function App() {
- const [currentPage, setCurrentPage] = useState("welcome");
-  
-/*   useEffect(() => {
+  const [currentPage, setCurrentPage] = useState("wallet");
+  try {
+    browser.browserAction.setPopup({popup: "/index.html"});
+  } catch 
+  {}
+  /*   useEffect(() => {
     browser.storage.local.get("settings").then(onGot, onError)
   
     function onGot(item:any) {
@@ -25,24 +30,18 @@ function App() {
       setCurrentPage("welcome");
     }
   },[]) */
-  
 
   return (
-   <>
-    {currentPage != "welcome" && 
-    <div className="bg-primary h-16">
-    <div className="flex p-3">
-      <div><img src="/isotype_circle.png" className="h-10"alt="" /></div>
-      <div className="grow"></div>
-      <div className="rounded-full mx-2 border text-sm border-gray-300 p-2 hover:bg-hoverish cursor-pointer" onClick={() => setCurrentPage("welcome")}>Solar Mainnet</div>
-      <div>User</div>
+    <div className="sm:h-1/2">
+      <div className="bg-dark-primary text-white h-[600px] sm:h-full">
+      {currentPage == "welcome" && <Welcome goTo={setCurrentPage} />}
+      {currentPage == "import" && <Import goTo={setCurrentPage} />}
+      {currentPage == "wallet" && <Wallet goTo={setCurrentPage} />}
+      {currentPage == "new" && <New goTo={setCurrentPage} />}
+      {currentPage == "login" && <Login goTo={setCurrentPage} />}
+      {currentPage == "settings" && <Settings goTo={setCurrentPage} />}
     </div>
-  </div>
-    }
-   {currentPage == "welcome" && <Welcome goTo={setCurrentPage}/>}
-   {currentPage == "wallet" && <Wallet goTo={setCurrentPage}/>}
-   {currentPage == "settings" && <Settings goTo={setCurrentPage}/>}
-   </>
+    </div>
   );
 }
 
