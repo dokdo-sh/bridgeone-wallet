@@ -1,31 +1,35 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "browserWallet",
+  "name": "Solar Browser Wallet",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "icons": {
-    "16": "isotype_circle.png",
-    "32": "isotype_circle.png",
-    "48": "isotype_circle.png",
-    "96": "isotype_circle.png",
-    "128": "isotype_circle.png"
+    "16": "isotype_square.png",
+    "32": "isotype_square.png",
+    "48": "isotype_square.png",
+    "96": "isotype_square.png",
+    "128": "isotype_square.png"
   },
   "browser_action": {
     "default_icon": {
-      "16": "isotype_circle.png",
-      "32": "isotype_circle.png"
+      "16": "isotype_square.png",
+      "32": "isotype_square.png"
       }
   },
   "permissions": [
     "storage",
-    "unlimitedStorage"
+    "cookies",
+    "unlimitedStorage",
+    "notifications"
   ],
-  "start_url": ".",
-  "scripts": ["/static/js/main.4160e540.js"],
   "background": {
     "scripts": ["/armor.js"]
   },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "leitesv@tuta.io",
+      "strict_min_version": "42.0"
+    }
+  },  
   "version": "1.0",
-  "manifest_version": 2,
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "manifest_version": 2
 }

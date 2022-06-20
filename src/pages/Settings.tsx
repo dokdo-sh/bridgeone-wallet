@@ -14,12 +14,12 @@ export function Settings(props: {goTo: (page:string) => void}) {
             {page == "home" && <>
             <div className="font-black text-3xl px-5 py-8 border-b border-dark-tertiary">Settings</div>
             <div className='divide-y divide-dark-tertiary'>
-            <div className='py-3 text-xl px-5 hover:bg-dark-hoverish select-none cursor-pointer flex items-center' onClick={() => setPage("general")}>
+            {/* <div className='py-3 text-xl px-5 hover:bg-dark-hoverish select-none cursor-pointer flex items-center' onClick={() => setPage("general")}>
                 <BsGearFill className='inline-flex mr-2 p-1 text-3xl'/>General
-            </div>
-            <div className='py-3  text-xl px-5 hover:bg-dark-hoverish select-none cursor-pointer flex items-center' onClick={() => setPage("security")}>
+            </div> */}
+            {/* <div className='py-3  text-xl px-5 hover:bg-dark-hoverish select-none cursor-pointer flex items-center' onClick={() => setPage("security")}>
                 <BsFillLockFill className='inline-flex mr-2 p-1 text-3xl'/>Security and privacy
-            </div>
+            </div> */}
             
             <div className='py-3  text-xl px-5 hover:bg-dark-hoverish select-none cursor-pointer flex items-center' onClick={() => setPage("networks")}>
                 <BiNetworkChart className='inline-flex mr-2 p-1 text-3xl'/>Networks

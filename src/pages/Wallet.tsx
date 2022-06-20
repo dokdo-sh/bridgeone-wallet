@@ -9,7 +9,6 @@ import {
   BsGearFill,
 } from "react-icons/bs";
 import Armor from "../Armor";
-import { WalletModal } from "../components/wallet/WalletModal";
 import { WalletTransactions } from "../components/wallet/WalletTransactions";
 import { Home } from "../components/wallet/Home";
 import { Contacts } from "./Contacts";

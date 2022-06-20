@@ -9,7 +9,7 @@ export const Networks = (props: {goBack: () => void}) => {
             <div className="border-b border-dark-tertiary px-3 flex items-center">
                 <div className="rounded-full hover:bg-dark-hoverish p-2 cursor-pointer ease-in duration-100 h-fit" onClick={() => {props.goBack()}}><MdArrowBack className="text-2xl"/></div>
                 <div className="font-black text-3xl px-5 py-8 grow">Networks</div>
-                <div><Button>Add</Button></div>
+                <div><Button disabled>Add</Button></div>
             </div>
             <div className="py-3 px-3 space-y-2">
                 {Armor.defaultNetworks.map((network) => (

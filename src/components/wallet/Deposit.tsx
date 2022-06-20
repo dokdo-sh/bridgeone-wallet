@@ -1,10 +1,18 @@
+import { useEffect, useState } from "react";
 import { BiCopy } from "react-icons/bi";
 import QRCode from "react-qr-code";
 import Armor from "../../Armor";
+import solar from "../../wallets/solar";
 
-export const Deposit = () => {
-    const currentWallet = Armor.currentWallet()
-    return (
+export const Deposit = (props:{currentWallet: solar}) => {
+    const [currentWallet, setCurrentWallet] = useState(undefined)
+
+    useEffect(() => {
+      setCurrentWallet(props.currentWallet);
+    }, [props.currentWallet])
+
+    if (currentWallet) {
+      return (
         <div>
           <div className="py-4 px-10">
               You can scan the QR code or click on the address below to copy it.
@@ -19,4 +27,7 @@ export const Deposit = () => {
           <div className="py-4 px-10"> Be aware that transactions can take up to some minutes to get confirmed.</div>
         </div>
     );
+    } else {
+      return <div></div>
+    }
 }
