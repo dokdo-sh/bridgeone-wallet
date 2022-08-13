@@ -8,10 +8,6 @@ In the project directory, you can run:
 
 ### `yarn install`
 
-And then:
-
-### `yarn postinstall`
-
 ## Build 
 
 ### `yarn build`
