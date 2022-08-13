@@ -1,0 +1,35 @@
+{
+  "short_name": "browserWallet",
+  "name": "Solar Browser Wallet",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "16": "isotype_square.png",
+    "32": "isotype_square.png",
+    "48": "isotype_square.png",
+    "96": "isotype_square.png",
+    "128": "isotype_square.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "isotype_square.png",
+      "32": "isotype_square.png"
+      }
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "unlimitedStorage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": ["/armor.js"]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "leitesv@tuta.io",
+      "strict_min_version": "42.0"
+    }
+  },  
+  "version": "1.0.1",
+  "manifest_version": 2
+}
