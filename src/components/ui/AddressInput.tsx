@@ -13,6 +13,7 @@ const [valid, setValid] = useState(false);
         if (props.validate) {
             validateAddress(props.value).then((isValid:boolean) => {
                 props.validate(isValid);
+                setValid(isValid);
             })
         }
     }, [props.network])
@@ -21,6 +22,7 @@ const [valid, setValid] = useState(false);
         if (props.validate) {
             validateAddress(props.value).then((isValid:boolean) => {
                 props.validate(isValid);
+                setValid(isValid);
             })
         }
     }, [props.value])

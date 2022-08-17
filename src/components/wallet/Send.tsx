@@ -67,7 +67,7 @@ export const Send = (props:{currentWallet: solar, show: boolean, setShow: (b:boo
     <Recipients onChange={onRecipientsChange}/>
 
       <div className="py-3">
-        <div className="text-gray-300 text-sm">Vendorfield (optional)</div>
+        <div className="text-gray-300 text-sm">Memo (optional)</div>
         <textarea className="w-full p-3 mt-2 h-24 bg-dark-secondary rounded-lg outline-greenish" value={vendorfield} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {setVendorfield(e.currentTarget.value)}} maxLength={255} />
         <div className="text-gray-400 text-xs text-right">
           {vendorfield.length}/255 characters

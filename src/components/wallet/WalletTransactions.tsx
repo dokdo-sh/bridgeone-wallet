@@ -26,13 +26,13 @@ export const WalletTransactions = (props:{currentWallet: solar}) => {
     return <div className="min-h-full">Loading</div>;
   } else {
     return (
-      <div className="sm:h-1/2 overflow-y-auto h-[200px]">
+      <div className="sm:h-1/2 overflow-y-auto h-[180px]">
         {transactions.map((transaction: any) => (
           <div className="py-3 px-2 items-center hover:bg-dark-hoverish cursor-pointer select-none" onClick={() => {setModalTx(transaction.id);setShowTransaction(true)}}>
             <div className="flex align-middle items-center">
               <BsReceipt className="inline-flex text-greenish hover:text-dark-greenish cursor-pointer mr-3" />
               <div>
-                  {transaction.type == 3 && transaction.typeGroup == 1 &&
+                  {transaction.type == 2 && transaction.typeGroup == 2 &&
                     <div>
                       <div>Switched vote</div>
                       <div className="text-gray-400 text-xs"><BsClock className="inline-block"/> {moment(transaction.timestamp.human).fromNow()}</div>

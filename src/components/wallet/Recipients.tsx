@@ -67,8 +67,7 @@ export const Recipients = (props: {onChange?: (recipients:Array<{address:string,
       let bsa = solar.validateAddress(text, currentWallet.network) &&
       !isNaN(parseFloat(amount)) &&
       Number(amount) > 0 &&
-      Number(amount) <= currentBalance &&
-      recipients.length == 0
+      Number(amount) <= currentBalance
       setAddEnabled(bsa);
   }
 
@@ -99,7 +98,7 @@ export const Recipients = (props: {onChange?: (recipients:Array<{address:string,
                     className=" border border-dark-tertiary hover:bg-dark-hoverish px-3 py-1 select-none flex items-center cursor-pointer"
                     key={contact.address}
                     onClick={() => {
-                      setSearch(contact.address);validateFields(contact.address,amount)
+                      changeSearch(contact.address);validateFields(contact.address,amount)
                     }}
                   >
                     <div className="grow">

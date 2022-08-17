@@ -1,4 +1,4 @@
-# Solar Browser Wallet
+# BridgeOne wallet branded as Solar Browser Wallet
 
 This project was created by leitesv [leitesv.dev](https://leitesv.dev/) (leitesv@tuta.io).
 
@@ -7,10 +7,6 @@ This project was created by leitesv [leitesv.dev](https://leitesv.dev/) (leitesv
 In the project directory, you can run:
 
 ### `yarn install`
-
-And then:
-
-### `yarn postinstall`
 
 ## Build 
 

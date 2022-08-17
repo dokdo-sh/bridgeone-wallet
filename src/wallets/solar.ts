@@ -64,9 +64,9 @@ export class Solar {
         }
      }
 
-    async getVote() : Promise<string> {
+    async getVote() : Promise<any> {
         try {
-         return (await (await fetch(`${this.network.api_url}/wallets/${this.address}`)).json()).data.attributes.vote as string;
+         return (await (await fetch(`${this.network.api_url}/wallets/${this.address}`)).json()).data.votingFor;
         } catch {
             return "";
         }
@@ -87,18 +87,18 @@ export class Solar {
                     Managers.configManager.setFromPreset(this.network.preset);
                     let transaction = Transactions.BuilderFactory.transfer()
                 tx.recipients.map((recipient) => {
-                 transaction = transaction.addPayment(recipient.addresss,Big(recipient.amount).times(10 ** 8).toFixed(0));
+                    transaction.addTransfer(recipient.address,Big(recipient.amount).times(10 ** 8).toFixed(0))
                 })
               let itransaction = transaction.fee(Big(tx.fee).times(10 ** 8).toFixed(0))
                 .nonce((nonce + 1).toString());
                 if (tx.vendorField && tx.vendorField.length>0) {
-                    itransaction = itransaction.vendorField(tx.vendorField)
+                    itransaction = itransaction.memo(tx.vendorField)
                 }
                 let passphrase = await Armor.Vault.getPassphrase(this.passphrase,password)
                 let txJson = itransaction.sign(passphrase)
                 .build()
                 .toJson();
-                
+                Armor.addTxToQueue(JSON.stringify({transactions: [txJson]}),this.network.api_url);
             } else {
                 
                     Managers.configManager.setFromPreset(this.network.preset);
@@ -113,7 +113,7 @@ export class Solar {
                 )
                 .nonce((nonce + 1).toString());
                 if (tx.vendorField && tx.vendorField.length>0) {
-                    itransaction = itransaction.vendorField(tx.vendorField)
+                    itransaction = itransaction.memo(tx.vendorField)
                 }
                 let passphrase = await Armor.Vault.getPassphrase(this.passphrase,password)
                 let txJson = itransaction.sign(passphrase)
@@ -140,45 +140,33 @@ export class Solar {
       }
 
      async vote(delegate:string, fee:string, password:string) {
-            let currentVote : string = await this.getVote()
-            let publicKey = ""
-            
-            if (currentVote) {
-                publicKey = (await (await fetch(`${this.network.api_url}/delegates/${await this.getVote()}`)).json()).data.publicKey
-            }  
-            
-            let nonce = await this.getCurrentNonce()
-            Managers.configManager.setFromPreset(this.network.preset);
-            let passphrase = await Armor.Vault.getPassphrase(this.passphrase,password)
-            let txBuild = Transactions.BuilderFactory.vote()
-            .nonce((nonce + 1).toString())
-            
-            if (publicKey.length) {
-                txBuild = txBuild.votesAsset([`-${publicKey}`,`+${delegate}`])
-            } else {
-                txBuild = txBuild.votesAsset([`+${delegate}`])
-            }
 
-            let txJson =  txBuild.fee(Big(fee).times(10 ** 8).toFixed(0))
-            .sign(passphrase)
-            .build()
-            .toJson()
-
-            Armor.addTxToQueue(JSON.stringify({transactions: [txJson]}),this.network.api_url);
-    }
-    async unvote(delegate:string, fee:string, password:string) {
         let nonce = await this.getCurrentNonce()
         Managers.configManager.setFromPreset(this.network.preset);
         let passphrase = await Armor.Vault.getPassphrase(this.passphrase,password)
         let txJson = Transactions.BuilderFactory.vote()
         .nonce((nonce + 1).toString())
-        .votesAsset([`-${delegate}`])
+        .votesAsset({[delegate]:100})
         .fee(Big(fee).times(10 ** 8).toFixed(0))
         .sign(passphrase)
         .build()
         .toJson()
         
-        Armor.addTxToQueue(JSON.stringify({transactions: [txJson]}),this.network.api_url);       
+        Armor.addTxToQueue(JSON.stringify({transactions: [txJson]}),this.network.api_url)     
+    }
+    async unvote(fee:string, password:string) {
+        let nonce = await this.getCurrentNonce()
+        Managers.configManager.setFromPreset(this.network.preset);
+        let passphrase = await Armor.Vault.getPassphrase(this.passphrase,password)
+        let txJson = Transactions.BuilderFactory.vote()
+        .nonce((nonce + 1).toString())
+        .votesAsset({})
+        .fee(Big(fee).times(10 ** 8).toFixed(0))
+        .sign(passphrase)
+        .build()
+        .toJson()
+        
+        Armor.addTxToQueue(JSON.stringify({transactions: [txJson]}),this.network.api_url)     
     }
     
     async getLatestTransactions() : Promise<any> {
