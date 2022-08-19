@@ -66,13 +66,13 @@ export const Transaction = (props: {txId:string}) => {
             {transaction.type == 6 && transaction.typeGroup == 1 && <div className="py-2">
             <div className="text-gray-400 text-sm">
                 Recipients
-                <div className="m-1 p-2 bg-dark-tertiary text-xs">
-                {transaction.asset.payments.map((payment:any) => (
+                <div className="m-1 p-2 bg-dark-tertiary text-xs rounded">
+                {transaction.asset.transfers.map((payment:any) => (
                     <div>
                         <div className="text-greenish">{payment.recipientId}</div>
                         <div className="pl-5">{payment.amount/100000000} SXP</div>
                     </div>
-                ))} SXP
+                ))}
                 </div>
             </div>
             <div className="text-xs break-words text-greenish py-1 px-1">{transaction.recipient}</div>
@@ -83,13 +83,36 @@ export const Transaction = (props: {txId:string}) => {
             </div>
             <div className="text-xs break-words text-greenish py-1 px-1">{transaction.recipient}</div>
             </div>}
-            
+            {transaction.type == 2 && transaction.typeGroup == 2 && Object.keys(transaction.asset.votes).length == 0 &&
+            <div className="py-2">
+            <div className="text-gray-400 text-sm">
+                Voted for
+            </div>
+            <span className="break-words py-1 px-1">Cancelled vote</span>
+            </div>
+            }
+                        {transaction.type == 2 && transaction.typeGroup == 2 && Object.keys(transaction.asset.votes).length > 0 &&
+            <div className="py-2">
+            <div className="text-gray-400 text-sm">
+                Voted for
+            </div>
+            <div className="m-1 p-2 bg-dark-tertiary text-xs rounded">
+                {Object.keys(transaction.asset.votes).map((vv) => (
+                    <div className="flex flex-row">
+                    <div className="text-greenish px-3">{vv}</div>
+                    <div className="pl-5">{transaction.asset.votes[vv]}%</div>
+                </div>
+                ))}
+            </div>
+            </div>
+            }
+ {(transaction.type != 2 && transaction.typeGroup != 2) &&
             <div className="py-2">
             <div className="text-gray-400 text-sm">
                 Amount
             </div>
             <span className="break-words py-1 px-1">{transaction.amount/100000000} {currentWallet.network.ticker}</span>
-            </div>
+            </div>}
 
             <div className="py-2">
             <div className="text-gray-400 text-sm">
@@ -105,11 +128,11 @@ export const Transaction = (props: {txId:string}) => {
             <div className="text-xs break-words text-greenish py-1 px-1">{transaction.confirmations}</div>
             </div>
             
-            {transaction.vendorField && <div className="py-2">
+            {transaction.memo && <div className="py-2">
             <div className="text-gray-400 text-sm">
-                Vendorfield
+                Memo
             </div>
-            <div className="py-2 px-2 my-1 rounded bg-dark-secondary">{transaction.vendorField}</div>
+            <div className="py-2 px-2 my-1 rounded bg-dark-secondary">{transaction.memo}</div>
             </div>}
         </div>
     )}  else { 

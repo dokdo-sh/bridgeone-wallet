@@ -150,8 +150,8 @@ export const Armor =  {
             if (!cc) {
                 return browser.storage.local.set({contacts: [cont]})
             } else {
-                let existing = cc.filter((contact:any) => contact.address == cont.address)
-                if (!existing.address) {
+                let existing = cc.filter((con:any) => {if (cont.address == con.address) {return con}})
+                if (!existing.length) {
                     return browser.storage.local.set({contacts: cc.concat([cont])})
                 }
             }

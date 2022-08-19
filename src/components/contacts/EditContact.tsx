@@ -35,7 +35,7 @@ export const EditContact = (props: {contact:Contact, setShow: (s:boolean) => voi
                 ))}
             </div>
             </div>
-            {!edit && <div className="flex py-5"><Button disabled={!(network.title && name.length > 0 && validAddress)} onClick={() => {Armor.contacts.add({name:name, network:network, address:address}).then(() => {props.setShow(false);});}}>Save</Button></div>}
+            {!edit && <div className="flex py-5"><Button disabled={!(network.title && name.length > 0 && validAddress)} onClick={() => {Armor.contacts.add({name:name, network:network, address:address}).then(() => {props.setShow(false);}); setAddress("");setName("");}}>Save</Button></div>}
         </div>
     );
 }

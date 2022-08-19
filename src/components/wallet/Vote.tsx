@@ -68,10 +68,10 @@ export const Vote = (props:{currentWallet: solar, show:boolean, setShow : (b:boo
         .then((response: any) => {
           setDelegates(response.data);
         });
-        currentWallet.getVote().then((vote:string | undefined) => {
-          if (vote) {
+        currentWallet.getVote().then((vote:any) => {
+          if (vote != {}) {
             fetch(
-              `${currentWallet.network.api_url}/delegates/${vote}`
+              `${currentWallet.network.api_url}/delegates/${Object.keys(vote)[0]}`
             )
               .then((response) => response.json())
               .then((response: any) => {
@@ -144,7 +144,7 @@ export const Vote = (props:{currentWallet: solar, show:boolean, setShow : (b:boo
                       {delegate.username}{" "}
                     </span>
                     <span className="text-right text-gray-500">
-                      {(delegate.votes / 100000000).toLocaleString()} {currentWallet.network.ticker}
+                      {(delegate.votesReceived.votes / 100000000).toLocaleString()} {currentWallet.network.ticker}
                     </span>
                   </div>
                     {selectedDelegate == delegate.username && <div className="flex"><div className="grow"></div><Button className="px-2 text-sm m-2" onClick={() => {

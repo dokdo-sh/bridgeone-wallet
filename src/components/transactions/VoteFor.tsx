@@ -35,7 +35,7 @@ export const VoteFor = (props: {username : string, setShow: (b:boolean) => void}
 
       function vote() {
         Armor.currentWallet().then((wallet) => {
-            wallet.vote(delegateInfo.publicKey,fee, password).then(() => {
+            wallet.vote(delegateInfo.username,fee, password).then(() => {
                 props.setShow(false);
             })
         })
@@ -75,7 +75,7 @@ export const VoteFor = (props: {username : string, setShow: (b:boolean) => void}
                 </div>
                 <div className="flex">
                   <div className="grow">Votes</div>
-                  <div>{delegateInfo.votes/100000000} {currentWallet.network.ticker}</div>
+                  <div>{delegateInfo.votesReceived.votes/100000000} {currentWallet.network.ticker}</div>
                 </div>
               </div>
             </div>

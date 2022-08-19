@@ -44,7 +44,8 @@ export const Contacts = (props: {goTo: (page:string) => void}) => {
                     <div className={`border text-xs border-dark-secondary py-1 px-2 rounded-full cursor-pointer hover:bg-dark-greenish ${selectedNetwork == network? 'bg-greenish' : ''}`} onClick={() => {selectNetwork(network)}}>{network.title}</div>
                 ))}
             </div>
-            <div className="py-3 px-3 space-y-2">
+            <div className="">
+            <div className="py-3 px-3 space-y-2 overflow-y-auto h-[360px]">
                  {contacts && contacts.length == 0 && 
                     <div className="m-2 p-3 rounded bg-dark-tertiary text-center">
                         No contacts added
@@ -63,6 +64,8 @@ export const Contacts = (props: {goTo: (page:string) => void}) => {
                     </div>
                      } 
                 })}
+            </div>
+
             </div>
             <Modal show={showEdit} setShow={setShowEdit} title={edit? "Edit contact" : "New contact"}>
                 <EditContact contact={edit} setShow={setShowEdit} />
