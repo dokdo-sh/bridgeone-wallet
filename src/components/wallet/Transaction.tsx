@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Armor from "../../Armor";
 import solar from "../../wallets/solar";
-declare var browser:any;
+import browser from 'webextension-polyfill'
 export const Transaction = (props: {txId:string}) => {
     const [transaction, setTransaction] = useState(undefined)
 

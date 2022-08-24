@@ -7,7 +7,7 @@ import { Import } from "./pages/Import";
 import { Wallet } from "./pages/Wallet";
 import { useLocation } from "react-router-dom";
 import Armor from "./Armor";
-declare var browser: any;
+import browser from 'webextension-polyfill'
 
 function App() {
   const { hash } = useLocation();

@@ -1,9 +1,8 @@
-import { Identities, Managers, Networks, Transactions } from "@solar-network/crypto";
-import { Address } from "@solar-network/crypto/dist/identities";
+//@ts-ignore
+import {Managers, Identities, Transactions} from "solar-crypto/index.esm"; 
 import {Big} from 'big.js'
 import { generateMnemonic } from "bip39";
 import Armor, { Network, SolarMainnet, Wallet } from "../Armor";
-
 export class Solar {
 
     address:string;
@@ -151,7 +150,6 @@ export class Solar {
         .sign(passphrase)
         .build()
         .toJson()
-        
         Armor.addTxToQueue(JSON.stringify({transactions: [txJson]}),this.network.api_url)     
     }
     async unvote(fee:string, password:string) {
@@ -165,7 +163,6 @@ export class Solar {
         .sign(passphrase)
         .build()
         .toJson()
-        
         Armor.addTxToQueue(JSON.stringify({transactions: [txJson]}),this.network.api_url)     
     }
     

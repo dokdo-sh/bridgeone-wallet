@@ -1,13 +1,14 @@
 import { useState } from "react";
 import Armor from "../Armor";
 import { Button } from "../components/ui/Button";
-declare var browser: any;
+import browser from 'webextension-polyfill'
 export function Login(props: { goTo: (page: string) => void }) {
   const [wrongPassword, setWrongPassword] = useState(false);
   const [password, setPassword] = useState("");
 
   function login() {
     Armor.login(password).then((value:boolean) => {
+      
       if (value == true) {
         Armor.getWallets().then((w:any) => {
           

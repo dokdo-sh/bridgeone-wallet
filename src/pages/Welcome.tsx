@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Wizard, useWizard } from "react-use-wizard";
 import { Button } from "../components/ui/Button";
 import Armor from "../Armor";
-declare var browser: any;
+import browser from 'webextension-polyfill'
 export function Welcome(props: { goTo: (page: string) => void }) {
   return (
     <>

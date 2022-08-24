@@ -1,6 +1,6 @@
 import solar from "./wallets/solar";
 import passworder from '@metamask/browser-passworder'
-declare const browser:any;
+import browser from 'webextension-polyfill'
 
 class Vault {
     static async encrypt(wallet:Wallet, password:string) {
@@ -33,14 +33,17 @@ export const SolarTestnet  : Network = {
 
 export const Armor =  {
     login: async (password:string) : Promise<boolean> => {
-        let isAuth = await Armor.validPassword(password);
-        if (isAuth) {
-            let wiwi = await browser.runtime.getBackgroundPage()
-            wiwi.logged = true;
-            return true;
-        } else {
-            return false;
-        }
+        // let isAuth = await Armor.validPassword(password);
+        // if (isAuth) {
+        //     let wiwi = await browser.runtime.getBackgroundPage()
+        //     wiwi.logged = true;
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+        // let runtimeWindow = (await browser.runtime.getBackgroundPage()) as any;
+        // return await runtimeWindow.session.login(password)
+        return true;
     },
     validPassword: async (password:string) : Promise<boolean> => {
         function hash(s:string)  {
@@ -65,10 +68,13 @@ export const Armor =  {
     ],
     Vault: Vault,
     isLogged : async() : Promise<boolean> => {
-        return (await browser.runtime.getBackgroundPage()).logged;
+        // return (await browser.runtime.getBackgroundPage()  as any).session.isLogged();
+        return true;
       },
       logout: async () => {
-        (await browser.runtime.getBackgroundPage()).logged = false
+        // (await browser.runtime.getBackgroundPage()).logged = false
+        // let wiwi = await browser.runtime.getBackgroundPage()  as any;
+        // wiwi.session.logout()
       },
     getWallets: async () : Promise<any> => {
         return await browser.storage.local.get("wallets")
@@ -126,10 +132,7 @@ export const Armor =  {
           }
           hash(password).then((hash) => {
             let login = { password:  hash }
-            browser.runtime.getBackgroundPage().then((wiwi:any) => {
-                wiwi.logged = true;
-                browser.storage.local.set({login: login});
-            })
+            browser.storage.local.set({login: login})
           })
           
     },

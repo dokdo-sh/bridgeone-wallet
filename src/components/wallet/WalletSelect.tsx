@@ -4,7 +4,7 @@ import { BsTrashFill } from "react-icons/bs";
 import { MdArrowBack } from "react-icons/md";
 import Armor, { Wallet } from "../../Armor";
 import solar from "../../wallets/solar";
-declare var browser : any;
+import browser from 'webextension-polyfill'
 export const WalletSelect = (props: { goTo: (page: string) => void, reload: () => void, setShow: (s:boolean) => void }) => {
     const [wallets, setWallets] = useState([])
     const [currentAddress, setCurrentAddress] = useState("");
