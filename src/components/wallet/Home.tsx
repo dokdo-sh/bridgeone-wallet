@@ -63,7 +63,7 @@ export const Home = (props: { goTo: (page: string) => void }) => {
             </div>
           </div> 
           <div className="w-fit px-4 py-3">
-            <BsFillLockFill className="hover:text-greenish cursor-pointer text-sm" title="Lock" onClick={() => {Armor.logout();props.goTo("login");}}/>
+            {/* <BsFillLockFill className="hover:text-greenish cursor-pointer text-sm" title="Lock" onClick={() => {Armor.logout();props.goTo("login");}}/> */}
           </div>
         </div>
         <div className="bg-greenish text-white text-sm py-1 px-4">

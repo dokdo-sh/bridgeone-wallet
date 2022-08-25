@@ -33,14 +33,7 @@ export const SolarTestnet  : Network = {
 
 export const Armor =  {
     login: async (password:string) : Promise<boolean> => {
-        let isAuth = await Armor.validPassword(password);
-        if (isAuth) {
-            let wiwi = await browser.runtime.getBackgroundPage()
-            wiwi.logged = true;
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     },
     validPassword: async (password:string) : Promise<boolean> => {
         function hash(s:string)  {
@@ -65,10 +58,10 @@ export const Armor =  {
     ],
     Vault: Vault,
     isLogged : async() : Promise<boolean> => {
-        return (await browser.runtime.getBackgroundPage()).logged;
+        return true;
       },
       logout: async () => {
-        (await browser.runtime.getBackgroundPage()).logged = false
+        // not implemented
       },
     getWallets: async () : Promise<any> => {
         return await browser.storage.local.get("wallets")
